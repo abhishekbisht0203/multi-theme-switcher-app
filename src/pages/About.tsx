@@ -1,244 +1,176 @@
-"use client"
+"use client";
 
-import { Users, Target, Award, Heart } from "lucide-react"
+import { Users, Target, Award, Heart } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const About = () => {
+  const { currentTheme } = useTheme();
+
   const stats = [
     { label: "Happy Customers", value: "10,000+", icon: Users },
     { label: "Products Sold", value: "50,000+", icon: Target },
     { label: "Awards Won", value: "25+", icon: Award },
     { label: "Years of Service", value: "5+", icon: Heart },
-  ]
+  ];
 
   const team = [
     {
       name: "Sarah Johnson",
       role: "CEO & Founder",
-      image: "/placeholder.svg?height=300&width=300",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
       bio: "Passionate about creating amazing shopping experiences.",
     },
     {
       name: "Mike Chen",
       role: "CTO",
-      image: "/placeholder.svg?height=300&width=300",
+      image: "https://randomuser.me/api/portraits/men/45.jpg",
       bio: "Tech enthusiast building the future of e-commerce.",
     },
     {
       name: "Emily Davis",
       role: "Head of Design",
-      image: "/placeholder.svg?height=300&width=300",
+      image: "https://randomuser.me/api/portraits/women/68.jpg",
       bio: "Creating beautiful and intuitive user experiences.",
     },
-  ]
+  ];
 
-  return (
-    <>
-      {/* Theme 1: Minimalist About */}
-      <div className="theme1:block theme2:hidden theme3:hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About Our Story</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We're passionate about bringing you the best products from around the world. Our mission is to make online
-              shopping simple, enjoyable, and trustworthy.
-            </p>
-          </div>
+  if (currentTheme === "theme1") {
+    return (
+      <div className="bg-white text-gray-800 min-h-screen px-4 py-12">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">About Us</h1>
+          <p className="text-lg">
+            We're passionate about bringing you the best products from around the world. Our mission is to make online
+            shopping simple, enjoyable, and trustworthy.
+          </p>
+        </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
-                  <stat.icon className="h-6 w-6 text-blue-600" />
-                </div>
-                <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="flex items-center space-x-4">
+              <stat.icon className="w-10 h-10 text-blue-600" />
+              <div>
+                <p className="text-xl font-semibold">{stat.value}</p>
+                <p className="text-gray-600">{stat.label}</p>
               </div>
-            ))}
-          </div>
-
-          {/* Mission */}
-          <div className="bg-gray-50 rounded-2xl p-8 md:p-12 mb-16">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                To revolutionize the online shopping experience by providing high-quality products, exceptional customer
-                service, and innovative technology that makes shopping a joy, not a chore.
-              </p>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Team */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
-            <p className="text-lg text-gray-600">The amazing people behind our success</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-center hover:shadow-md transition-shadow"
-              >
-                <img
-                  src={member.image || "/placeholder.svg"}
-                  alt={member.name}
-                  className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
-                />
-                <h3 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h3>
-                <p className="text-blue-600 font-medium mb-3">{member.role}</p>
-                <p className="text-gray-600 text-sm">{member.bio}</p>
-              </div>
-            ))}
-          </div>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold mb-4">Meet the Team</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {team.map((member, idx) => (
+            <div key={idx} className="text-center">
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-24 h-24 rounded-full mx-auto mb-2 object-cover"
+              />
+              <p className="font-semibold">{member.name}</p>
+              <p className="text-sm text-gray-500">{member.role}</p>
+              <p className="text-sm mt-1 text-gray-600">{member.bio}</p>
+            </div>
+          ))}
         </div>
       </div>
+    );
+  }
 
-      {/* Theme 2: Professional Dark About */}
-      <div className="theme1:hidden theme2:block theme3:hidden bg-gray-900 min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 serif">Our Legacy</h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Built on excellence, driven by innovation. We've been setting the standard for premium e-commerce
-              experiences since day one.
-            </p>
-          </div>
+  if (currentTheme === "theme2") {
+    return (
+      <div className="bg-gray-900 text-white min-h-screen px-4 py-12">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">About Us</h1>
+          <p className="text-lg text-gray-300">
+            We're passionate about bringing you the best products from around the world. Our mission is to make online
+            shopping simple, enjoyable, and trustworthy.
+          </p>
+        </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center bg-gray-800 rounded-lg p-6 border border-gray-700">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-amber-500/20 rounded-lg mb-4">
-                  <stat.icon className="h-6 w-6 text-amber-400" />
-                </div>
-                <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-sm text-gray-400 font-semibold">{stat.label}</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="flex items-center space-x-4">
+              <stat.icon className="w-10 h-10 text-yellow-400" />
+              <div>
+                <p className="text-xl font-semibold">{stat.value}</p>
+                <p className="text-gray-400">{stat.label}</p>
               </div>
-            ))}
-          </div>
-
-          {/* Mission */}
-          <div className="bg-gray-800 border border-gray-700 rounded-2xl p-8 md:p-12 mb-16">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-white mb-6 serif">Our Vision</h2>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                To become the world's most trusted premium marketplace, where quality meets innovation and every
-                customer experience exceeds expectations through cutting-edge technology and unparalleled service.
-              </p>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Team */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4 serif">Leadership Team</h2>
-            <p className="text-lg text-gray-400">The visionaries driving our success</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <div
-                key={index}
-                className="bg-gray-800 border border-gray-700 rounded-xl p-6 text-center hover:bg-gray-700 transition-colors"
-              >
-                <img
-                  src={member.image || "/placeholder.svg"}
-                  alt={member.name}
-                  className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-2 border-amber-400"
-                />
-                <h3 className="text-xl font-bold text-white mb-1 serif">{member.name}</h3>
-                <p className="text-amber-400 font-semibold mb-3">{member.role}</p>
-                <p className="text-gray-400 text-sm">{member.bio}</p>
-              </div>
-            ))}
-          </div>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold mb-4">Meet the Team</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {team.map((member, idx) => (
+            <div key={idx} className="text-center">
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-24 h-24 rounded-full mx-auto mb-2 object-cover"
+              />
+              <p className="font-semibold">{member.name}</p>
+              <p className="text-sm text-gray-400">{member.role}</p>
+              <p className="text-sm mt-1 text-gray-400">{member.bio}</p>
+            </div>
+          ))}
         </div>
       </div>
+    );
+  }
 
-      {/* Theme 3: Playful About */}
-      <div className="theme1:hidden theme2:hidden theme3:block bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
-            <h1
-              className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent mb-6"
-              style={{ fontFamily: "Pacifico, cursive" }}
+  if (currentTheme === "theme3") {
+    return (
+      <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 min-h-screen px-4 py-12 text-center">
+        <h1 className="text-5xl font-pacifico text-purple-600 mb-4">Welcome to Our Story</h1>
+        <p className="text-lg text-purple-800 max-w-2xl mx-auto mb-12">
+          Making e-commerce fun, easy, and delightful! 💖 We curate unique products for curious minds.
+        </p>
+
+        <div className="flex flex-wrap justify-center gap-6 mb-12">
+          {stats.map((stat, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-xl shadow-lg p-4 w-40 hover:scale-105 transition transform duration-300"
             >
-              Our Fun Story! 🎉
-            </h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              We're all about making shopping super fun and exciting! Join our colorful journey of bringing joy to every
-              purchase! ✨
-            </p>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-            {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="text-center bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border-2 border-pink-200 hover:scale-105 transition-transform"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full mb-4 shadow-lg">
-                  <stat.icon className="h-8 w-8 text-white" />
-                </div>
-                <div
-                  className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent mb-1"
-                  style={{ fontFamily: "Pacifico, cursive" }}
-                >
-                  {stat.value}
-                </div>
-                <div className="text-sm text-gray-600 font-semibold">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Mission */}
-          <div className="bg-gradient-to-r from-pink-100 to-purple-100 rounded-3xl p-8 md:p-12 mb-16 border-2 border-pink-200 shadow-xl">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-4xl font-bold text-gray-800 mb-6" style={{ fontFamily: "Pacifico, cursive" }}>
-                Our Super Mission! 🚀
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                To spread happiness through amazing products and create the most joyful shopping experience ever! We
-                believe shopping should be fun, colorful, and full of surprises! 🌈
-              </p>
+              <stat.icon className="w-8 h-8 text-pink-400 mx-auto mb-2" />
+              <p className="text-xl font-bold">{stat.value}</p>
+              <p className="text-sm text-gray-500">{stat.label}</p>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Team */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4" style={{ fontFamily: "Pacifico, cursive" }}>
-              Our Amazing Team! 👥
-            </h2>
-            <p className="text-lg text-gray-600">The fantastic people making magic happen!</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-white to-pink-50 rounded-3xl p-6 text-center shadow-xl border-2 border-pink-200 hover:scale-105 hover:rotate-1 transition-all"
-              >
-                <img
-                  src={member.image || "/placeholder.svg"}
-                  alt={member.name}
-                  className="w-28 h-28 rounded-full mx-auto mb-4 object-cover border-4 border-gradient-to-r from-pink-400 to-purple-500 shadow-lg"
-                />
-                <h3 className="text-xl font-bold text-gray-800 mb-1" style={{ fontFamily: "Pacifico, cursive" }}>
-                  {member.name}
-                </h3>
-                <p className="text-purple-600 font-bold mb-3">{member.role}</p>
-                <p className="text-gray-600 text-sm">{member.bio}</p>
-              </div>
-            ))}
-          </div>
+        <h2 className="text-3xl font-pacifico text-indigo-600 mb-8">Our Awesome Team 🌟</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {team.map((member, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300"
+            >
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-24 h-24 rounded-full mx-auto mb-3 object-cover"
+              />
+              <h3 className="text-lg font-semibold text-purple-700">{member.name}</h3>
+              <p className="text-sm text-gray-600">{member.role}</p>
+              <p className="text-sm text-gray-500 mt-2">{member.bio}</p>
+            </div>
+          ))}
         </div>
       </div>
-    </>
-  )
-}
+    );
+  }
 
-export default About
+  // Fallback
+  return (
+    <div className="text-center py-20">
+      <p className="text-xl text-gray-500">No valid theme selected.</p>
+    </div>
+  );
+};
+
+export default About;
