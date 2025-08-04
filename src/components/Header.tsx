@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Link, useLocation } from "react-router-dom"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useTheme } from "@/contexts/ThemeContext"
 import { ChevronDown, Menu, X, Palette, Search } from "lucide-react"
 import { useProducts } from "@/contexts/ProductContext"
@@ -11,7 +12,7 @@ const Header = () => {
   const { searchTerm, setSearchTerm } = useProducts()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const location = useLocation()
+  const location = usePathname()
 
   const themes = [
     { id: "theme1", name: "Minimalist", description: "Clean & Simple" },
@@ -30,7 +31,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-8">
-            <Link to="/" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-2">
               <Palette className="h-8 w-8 text-white animate-pulse" />
               <span className="text-xl font-bold text-white" style={{ fontFamily: "Pacifico, cursive" }}>
                 ThemeApp Fun
@@ -40,9 +41,9 @@ const Header = () => {
               {navItems.map((item) => (
                 <Link
                   key={item.path}
-                  to={item.path}
+                  href={item.path}
                   className={`text-sm font-bold transition-all transform hover:scale-105 ${
-                    location.pathname === item.path
+                    location === item.path
                       ? "text-yellow-300 drop-shadow-lg"
                       : "text-white hover:text-yellow-300"
                   }`}
@@ -54,7 +55,7 @@ const Header = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            {location.pathname === "/" && (
+            {location === "/" && (
               <div className="hidden sm:block relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
                 <input
@@ -112,10 +113,10 @@ const Header = () => {
             {navItems.map((item) => (
               <Link
                 key={item.path}
-                to={item.path}
+                href={item.path}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`block px-3 py-2 rounded-lg transition-colors ${
-                  location.pathname === item.path
+                  location === item.path
                     ? "bg-white/20 text-yellow-300"
                     : "text-white hover:bg-white/10"
                 }`}
@@ -123,7 +124,7 @@ const Header = () => {
                 {item.label}
               </Link>
             ))}
-            {location.pathname === "/" && (
+            {location === "/" && (
               <div className="px-3 py-2">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />

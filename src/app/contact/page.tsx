@@ -3,7 +3,7 @@ import type React from "react"
 import { useState } from "react"
 import { Mail, Phone, MapPin, Send, Clock, MessageCircle } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
-import { useTheme } from "../contexts/ThemeContext"
+import { useTheme } from "../../contexts/ThemeContext"
 
 const Contact = () => {
   const { toast } = useToast()

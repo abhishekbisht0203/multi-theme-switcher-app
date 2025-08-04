@@ -2,6 +2,11 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { ThemeProvider } from "@/contexts/ThemeContext"
+import { ProductProvider } from "@/contexts/ProductContext"
+import { FavoritesProvider } from "@/contexts/FavoritesContext"
+import Header from "@/components/Header"
+import { Toaster } from "@/components/UI/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -17,7 +22,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+            <ThemeProvider>
+      <ProductProvider>
+        <FavoritesProvider>
+          <div className="min-h-screen transition-all duration-500 ease-in-out">
+            <Header />
+            <main className="pt-16">
+              {children}
+            </main>
+            <Toaster />
+          </div>
+        </FavoritesProvider>
+      </ProductProvider>
+    </ThemeProvider>
+      </body>
     </html>
   )
 }

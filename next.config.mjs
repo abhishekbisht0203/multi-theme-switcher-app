@@ -7,10 +7,13 @@ const __dirname = path.dirname(__filename)
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
   webpack: (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname, 'src')
     return config
-  }
+  },
+
+  transpilePackages: ['react-router-dom'], // ✅ Important for App Router support with React Router
 }
 
 export default nextConfig
